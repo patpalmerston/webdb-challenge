@@ -21,15 +21,22 @@ async function findById(id) {
 
   const actions = await db("actions")
   .join( "projects", "projects.id", "=", "actions.project_id" )
-  .select( "*", "projects.name" )
+  .select( "actions.project_id", "actions.description", "actions.notes" )
   .where({ "actions.project_id": Number(id) })
     return {...project, actions: [...actions]};
 }
 
+// const add = function (project) {
+//   return db('projects')
+//       .insert(project)
+//       .then(([id]) => this.get(id));
+// }
 
 function add(project) {
   return db('projects')
-    .insert(project)
-    .then(([id]) => this.get(id))
+    .insert(project, "id")
+    .then(([id]) => {
+      return findById(id);
+    })
 }
 

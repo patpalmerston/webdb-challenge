@@ -11,7 +11,7 @@ exports.up = function(knex) {
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
 
-      tbl.string('description', 128).notNullable().unique();
+      tbl.string('description', 128).notNullable();
 
       tbl.text('notes');
 

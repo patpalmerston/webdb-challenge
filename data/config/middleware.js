@@ -8,5 +8,5 @@ module.exports = server => {
   server.use(morgan('dev'));
   server.use(helmet());
   server.use(express.json());
-  server.use(cors());
+  server.use(cors()); //dev
 }

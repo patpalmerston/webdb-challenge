@@ -22,6 +22,8 @@ function findById(id) {
 
 function add(action) {
   return db('actions')
-    .insert(action)
-    .then(([id]) => this.get(id))
+    .insert(action, "id")
+    .then(([id]) => {
+      return findById(id);
+    })
 }

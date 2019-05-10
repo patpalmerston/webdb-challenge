@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
     tbl
       .boolean('completed')
       .defaultTo(false)
-      .notNullable();
+      
   });
 };
 

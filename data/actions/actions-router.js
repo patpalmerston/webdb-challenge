@@ -31,5 +31,22 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+const addAction = (req, res) => {
+  if (req.body.project_id === undefined || req.body.description === undefined) {
+      res.status(400).json({ message: "name and notes for the action are required." });
+      return;
+  }
+
+  db.add(req.body)
+      .then(data => {
+          res.status(200).json(data);
+      })
+      .catch(err => {
+          res.status(500).json({ message: "Failed to save Project", error: err });
+      });
+}
+
+router.post('/', addAction);
+
 
 module.exports = router;

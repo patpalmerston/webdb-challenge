@@ -1,8 +1,8 @@
 exports.up = function(knex) {
-  return knex.schema.createTable('actions', function(actions) {
-    actions.increments();
+  return knex.schema.createTable('actions', tbl => {
+    tbl.increments();
 
-    actions
+    tbl
       .integer('project_id')
       .unsigned()
       .notNullable()
@@ -11,9 +11,13 @@ exports.up = function(knex) {
       .onDelete('CASCADE')
       .onUpdate('CASCADE');
 
-    actions.string('description', 128).notNullable();
-    actions.text('notes').notNullable();
-    actions.boolean('completed').defaultTo(false);
+      tbl.string('description', 128).notNullable().unique();
+
+      tbl.text('notes');
+
+      tbl
+        .boolean('completed')
+        .defaultTo(false)
   });
 };
 
